@@ -57,33 +57,54 @@
                             <input type="tel" class="form-control" id="telefone" placeholder="Telefone">
                         </div><br />
                     </div>
+                    <div class="row">
                         <div class="col" style="margin-top: 10px;">
                             <div class="form-group">
                                 <label for="produto" style="color: white">Qual produto você deseja?</label>
                                     <select class="form-control" id="produto">
-
-                                  
-                                              <option>Cream Ale 600ml</option>
-                                              <option>Cream Ale 300ml</option>
-                                              <option>Dark Mil 600ml</option>
-                                              <option>Dark Mild 300ml</option>
-                                              <option>Hidromel 750ml</option>
+                                        <option>Cream Ale 600ml R$ 12,00</option>
+                                        <option>Cream Ale 300ml R$ 7,00</option>
+                                        <option>Dark Mil 600ml R$ 11,00</option>
+                                        <option>Dark Mild 300ml R$ 6,00</option>
+                                        <option>Hidromel 750ml R$ 45,00</option>
                                     </select>
                             </div><br />
+                        </div>
+                        <div class="col" style="margin-top: 10px;">
                             <div class="form-group">
                                 <label for="forma" style="color: white">Forma: Retirada ou Entrega?</label>
                                     <select class="form-control" id="forma">
-
-                                  
-                                              <option>Retirada</option>
-                                              <option>Entrega</option>
+                                        <option>Retirada</option>
+                                        <option>Entrega</option>
                                     </select>
                             </div><br />
+                        </div>
+                    </div>
+                        <div class="row">
                             <div class="col">
+                                <div class="form-group">
+                                    <label for="pagamento" style="color: white">Forma de Pagamento</label>
+                                        <select class="form-control" id="pagamento">
+                                            <option>Pix</option>
+                                            <option>Dinheiro</option>
+                                        </select>
+                                </div><br />
+                            </div>
+                            <div class="col" style="margin-top: 24px;">
                                 <input type="text" class="form-control" id="quantidade" placeholder="Quantidade">
                             </div><br />
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" id="cidade" placeholder="Cidade">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" id="endereco" placeholder="endereco">
+                            </div>
+                        </div><br />
                              <button style="margin-bottom: 30px;" id="submit" type="submit" class="btn btn-primary">Finalizar Pedido</button>
                         </div>
+                    </div>
                 </form> 
                 <script type="text/javascript">
                 document.querySelector('#submit').addEventListener('click',function(){
@@ -93,50 +114,65 @@
                  let telefone = document.querySelector('#telefone').value;
                  let produto = document.querySelector('#produto').value;
                  let forma = document.querySelector('#forma').value;
+                 let pagamento = document.querySelector('#pagamento').value;
                  let quantidade = document.querySelector('#quantidade').value;
+                 let cidade = document.querySelector('#cidade').value;
+                 let endereco = document.querySelector('#endereco').value;
                  var total = 0;
 
                  if(forma == 'Retirada') {
-                    if(produto == 'Cream Ale 600ml'){
+                    if(produto == 'Cream Ale 600ml R$ 12,00'){
                         var total = quantidade * 12;
+                        produto = 'Cream Ale 600ml';
                     }
-                    else if(produto == 'Cream Ale 300ml'){
+                    else if(produto == 'Cream Ale 300ml R$ 7,00'){
                         var total = quantidade * 7;
+                        produto = 'Cream Ale 300ml';
                     }
-                    else if(produto == 'Dark Mild 600ml'){
+                    else if(produto == 'Dark Mild 600ml R$ 11,00'){
                         var total = quantidade * 11;
+                        produto = 'Dark Mild 600ml';
                     }
-                    else if(produto == 'Dark Mild 300ml'){
+                    else if(produto == 'Dark Mild 300ml R$ 6,00'){
                         var total = quantidade * 6;
+                        produto = 'Dark Mild 300ml';
                     }
-                    else if(produto == 'Hidromel 750ml'){
+                    else if(produto == 'Hidromel 750ml R$ 45,00'){
                         var total = quantidade * 45;
+                        produto = 'Hidromel 750ml';
                     }
                  }
                  else if(forma == 'Entrega') {
-                    if(produto == 'Cream Ale 600ml'){
-                        var total = quantidade * 14;
+                    if(produto == 'Cream Ale 600ml R$ 12,00'){
+                        var total = quantidade * 12;
+                        produto = 'Cream Ale 600ml';
                     }
-                    else if(produto == 'Cream Ale 300ml'){
-                        var total = quantidade * 9;
+                    else if(produto == 'Cream Ale 300ml R$ 7,00'){
+                        var total = quantidade * 7;
+                        produto = 'Cream Ale 300ml';
                     }
-                    else if(produto == 'Dark Mild 600ml'){
-                        var total = quantidade * 13;
+                    else if(produto == 'Dark Mild 600ml R$ 11,00'){
+                        var total = quantidade * 11;
+                        produto = 'Dark Mild 600ml';
                     }
-                    else if(produto == 'Dark Mild 300ml'){
-                        var total = quantidade * 8;
+                    else if(produto == 'Dark Mild 300ml R$ 6,00'){
+                        var total = quantidade * 6;
+                        produto = 'Dark Mild 300ml';
                     }
-                    else if(produto == 'Hidromel 750ml'){
-                        var total = quantidade * 47;
+                    else if(produto == 'Hidromel 750ml R$ 45,00'){
+                        var total = quantidade * 45;
+                        produto = 'Hidromel 750ml';
                     }
                  }
-                 console.log(total);
                  
-                let url = "https://api.whatsapp.com/send?phone=5549991945261&text= Bem vindo a Villetta Cervejaria! %0ANome: " + cliente + " " +
-                sobrenome + "%0AE-mail: "+ email +" %0ATelefone: "+ telefone +" %0AProduto: " + produto + " %0ARetirada/Entrega: " + forma + " %0AQuantidade: " + quantidade + " %0ATotal Pedido R$: " + total + "%0AObrigado pela preferência!" + "%0AAguarde um momento que já lhe respondo!"; 
+                let url = "https://api.whatsapp.com/send?phone=5549991945261&text= Olá, gostaria de fazer o seguinte pedido! %0ANome: " + cliente + " " +
+                sobrenome + "%0AE-mail: "+ email +" %0ATelefone: "+ telefone + " %0ACidade: " + cidade + " %0AEndereco: " + endereco + " %0AProduto: " + produto + " %0ARetirada/Entrega: " + forma + " %0AQuantidade: " + quantidade + " UN" + " %0ATotal Pedido R$: " + total + ",00" + " %0AForma de Pagamento: " + pagamento + "%0AObrigado pela preferência!" + "%0AAguarde um momento que já lhe respondo!";
 
-                window.open(url);
-
+                
+                if (window.confirm('Deseja confirmar o pedido?')) {
+                    alert('Total do Pedido: R$' + ' ' + total);
+                    window.open(url);
+                }
                 });
                 </script>
             </div>
