@@ -36,6 +36,9 @@
         </nav>
         <!-- About-->
         <section class="about-section text-center" id="about">
+            <div class="col" style="margin-bottom: 10px;">
+                <h1 class="mx-auto my-0 text-uppercase" style="color: white; font-family: Cinzel">Pedido</h1>
+            </div>
             <div class="container px-4 px-lg-5">
                 <form action="#" method="#">
                     <div class="row">
@@ -46,16 +49,18 @@
                             <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome">
                         </div>
                     </div><br />
+                    <div class="row">
                         <div class="col">
                             <input type="text" class="form-control" id="email" placeholder="email">
                         </div><br />
                         <div class="col">
                             <input type="tel" class="form-control" id="telefone" placeholder="Telefone">
                         </div><br />
-                        <div class="col">
+                    </div>
+                        <div class="col" style="margin-top: 10px;">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1" style="color: white">Qual produto você deseja?</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                <label for="produto" style="color: white">Qual produto você deseja?</label>
+                                    <select class="form-control" id="produto">
 
                                   
                                               <option>Cream Ale 600ml</option>
@@ -65,9 +70,18 @@
                                               <option>Hidromel 750ml</option>
                                     </select>
                             </div><br />
+                            <div class="form-group">
+                                <label for="forma" style="color: white">Forma: Retirada ou Entrega?</label>
+                                    <select class="form-control" id="forma">
+
+                                  
+                                              <option>Retirada</option>
+                                              <option>Entrega</option>
+                                    </select>
+                            </div><br />
                             <div class="col">
-                            <input type="quant" class="form-control" id="quantidade" placeholder="Quantidade">
-                        </div><br />
+                                <input type="text" class="form-control" id="quantidade" placeholder="Quantidade">
+                            </div><br />
                              <button style="margin-bottom: 30px;" id="submit" type="submit" class="btn btn-primary">Finalizar Pedido</button>
                         </div>
                 </form> 
@@ -77,11 +91,49 @@
                  let sobrenome = document.querySelector('#sobrenome').value;
                  let email = document.querySelector('#email').value;
                  let telefone = document.querySelector('#telefone').value;
-                 let exampleFormControlSelect1 = document.querySelector('#exampleFormControlSelect1').value;
+                 let produto = document.querySelector('#produto').value;
+                 let forma = document.querySelector('#forma').value;
                  let quantidade = document.querySelector('#quantidade').value;
+                 var total = 0;
+
+                 if(forma == 'Retirada') {
+                    if(produto == 'Cream Ale 600ml'){
+                        var total = quantidade * 12;
+                    }
+                    else if(produto == 'Cream Ale 300ml'){
+                        var total = quantidade * 7;
+                    }
+                    else if(produto == 'Dark Mild 600ml'){
+                        var total = quantidade * 11;
+                    }
+                    else if(produto == 'Dark Mild 300ml'){
+                        var total = quantidade * 6;
+                    }
+                    else if(produto == 'Hidromel 750ml'){
+                        var total = quantidade * 45;
+                    }
+                 }
+                 else if(forma == 'Entrega') {
+                    if(produto == 'Cream Ale 600ml'){
+                        var total = quantidade * 14;
+                    }
+                    else if(produto == 'Cream Ale 300ml'){
+                        var total = quantidade * 9;
+                    }
+                    else if(produto == 'Dark Mild 600ml'){
+                        var total = quantidade * 13;
+                    }
+                    else if(produto == 'Dark Mild 300ml'){
+                        var total = quantidade * 8;
+                    }
+                    else if(produto == 'Hidromel 750ml'){
+                        var total = quantidade * 47;
+                    }
+                 }
+                 console.log(total);
                  
-                let url = "https://api.whatsapp.com/send?phone=5549991945261&text= Bem vindo a Villetta Cervejaria! -->> %0A Nome: " + cliente + " " +
-                sobrenome + "%0A E-mail: "+ email +" %0A Telefone: "+ telefone +" %0A Produto: " + exampleFormControlSelect1 +" %0A Quantidade: " + quantidade + "%0A Obrigado pela preferência! Entraremos em contato confirmando o pedido!" + "%0A Tenha um ótimo dia!"; 
+                let url = "https://api.whatsapp.com/send?phone=5549991945261&text= Bem vindo a Villetta Cervejaria! %0ANome: " + cliente + " " +
+                sobrenome + "%0AE-mail: "+ email +" %0ATelefone: "+ telefone +" %0AProduto: " + produto + " %0ARetirada/Entrega: " + forma + " %0AQuantidade: " + quantidade + " %0ATotal Pedido R$: " + total + "%0AObrigado pela preferência!" + "%0AAguarde um momento que já lhe respondo!"; 
 
                 window.open(url);
 
