@@ -102,11 +102,46 @@
                                 <input type="text" class="form-control" id="endereco" placeholder="endereco">
                             </div>
                         </div><br />
-                             <button style="margin-bottom: 30px;" id="submit" type="submit" class="btn btn-primary">Finalizar Pedido</button>
+                        <div class="row">
+                            <div class="col">
+                                <label for="pagamento" style="color: white">Total do Pedido R$</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="total" style="background-color: white; border-width: medium; border-color: #ffff;border-radius: 5px;"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br />
+                             <button style="margin-bottom: 15px;" id="submit" type="submit" class="btn btn-primary">Finalizar Pedido</button>
+                             <button style="margin-bottom: 15px;" id="calc" type="submit" class="btn btn-primary">Calcular Total</button>
                         </div>
                     </div>
                 </form> 
                 <script type="text/javascript">
+                    document.querySelector('#calc').addEventListener('click',function(){
+                            let produto = document.querySelector('#produto').value;
+                            let quantidade = document.querySelector('#quantidade').value;
+                            var total = 0;
+                            if(produto == 'Cream Ale 600ml R$ 12,00'){
+                                total = quantidade * 12;
+                            }
+                            else if(produto == 'Cream Ale 300ml R$ 7,00'){
+                                total = quantidade * 7;
+                            }
+                            else if(produto == 'Dark Mild 600ml R$ 11,00'){
+                                total = quantidade * 11;
+                            }
+                            else if(produto == 'Dark Mild 300ml R$ 6,00'){
+                                total = quantidade * 6;
+                            }
+                            else if(produto == 'Hidromel 750ml R$ 45,00'){
+                                total = quantidade * 45;
+                            }
+                            var tot = (total + ',00' + ' R$');
+                            document.getElementById('total').innerHTML = tot;
+    
+                });
+
                 document.querySelector('#submit').addEventListener('click',function(){
                  let cliente = document.querySelector('#nome').value;
                  let sobrenome = document.querySelector('#sobrenome').value;
@@ -169,11 +204,8 @@
                 sobrenome + "%0AE-mail: "+ email +" %0ATelefone: "+ telefone + " %0ACidade: " + cidade + " %0AEndereco: " + endereco + " %0AProduto: " + produto + " %0ARetirada/Entrega: " + forma + " %0AQuantidade: " + quantidade + " UN" + " %0ATotal Pedido R$: " + total + ",00" + " %0AForma de Pagamento: " + pagamento + "%0AObrigado pela preferência!" + "%0AAguarde um momento que já lhe respondo!";
 
                 
-                if (window.confirm('Deseja confirmar o pedido?')) {
-                    alert('Total do Pedido: R$' + ' ' + total);
-                    location.reload();
-                    window.open(url);
-                }
+                alert('Villetta Cervejaria agradece pela preferência!');
+                window.open(url);
                 });
                 </script>
             </div>
