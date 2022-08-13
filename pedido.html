@@ -104,24 +104,37 @@
                         </div><br />
                         <div class="row">
                             <div class="col">
-                                <label for="pagamento" style="color: white">Total do Pedido R$</label>
                                 <div class="row">
                                     <div class="col">
-                                        <p id="total" style="background-color: white; border-width: medium; border-color: #ffff;border-radius: 5px;"></p>
+                                        <label for="total" style="color: white; margin-bottom: 0px;">Total do Pedido R$</label>
+                                        <p id="total" style="margin-bottom: 5px; margin-left: 440px; margin-right: 440px; align-items: center; background-color: white; border-width: medium; border-color: #ffff;border-radius: 5px;"></p>
+                                        <label for="frete" style="color: white">Frete R$</label>
+                                        <p id="frete" style=" margin-left: 440px; margin-right: 440px; align-items: center; background-color: white; border-width: medium; border-color: #ffff;border-radius: 5px;"></p>
                                     </div>
                                 </div>
                             </div>
-                        </div><br />
+                        </div>
                              <button style="margin-bottom: 15px;" id="submit" type="submit" class="btn btn-primary">Finalizar Pedido</button>
-                             <button style="margin-bottom: 15px;" id="calc" type="submit" class="btn btn-primary">Calcular Total</button>
+                             <button style="margin-bottom: 15px;" id="calc" type="button" class="btn btn-primary">Calcular Total</button>
                         </div>
                     </div>
                 </form> 
                 <script type="text/javascript">
-                    document.querySelector('#calc').addEventListener('click',function(){
+                        var total = 0;
+                        var frete = 0;
+                        var tot = (total + ',00' + ' R$');
+                        var fret = (frete + ',00' + ' R$');
+                        document.getElementById('total').innerHTML = tot;
+                        document.getElementById('frete').innerHTML = fret;
+
+                    document.querySelector('#calc').addEventListener('click', function(){
+                            var total = 0;
+                            var frete = 0;
                             let produto = document.querySelector('#produto').value;
                             let quantidade = document.querySelector('#quantidade').value;
-                            var total = 0;
+                            let cidade = document.querySelector('#cidade').value;
+                            let forma = document.querySelector('#forma').value;
+
                             if(produto == 'Cream Ale 600ml R$ 12,00'){
                                 total = quantidade * 12;
                             }
@@ -139,6 +152,20 @@
                             }
                             var tot = (total + ',00' + ' R$');
                             document.getElementById('total').innerHTML = tot;
+
+                            if(forma == 'Retirada'){
+                                frete = 0;
+                             }
+                             else if (forma == 'Entrega'){
+                                if(cidade == 'Pinhalzinho'){
+                                    frete = 5;
+                                }
+                                else if(cidade != 'Pinhalzinho'){
+                                    frete = 12;
+                                }
+                             }
+                             var fret = (frete + ',00' + ' R$');
+                            document.getElementById('frete').innerHTML = fret;
     
                 });
 
@@ -154,8 +181,20 @@
                  let cidade = document.querySelector('#cidade').value;
                  let endereco = document.querySelector('#endereco').value;
                  var total = 0;
+                 var frete = 0;
 
-                 if(forma == 'Retirada') {
+                 if(forma == 'Retirada'){
+                    frete = 0;
+                 }
+                 else if (forma == 'Entrega'){
+                    if(cidade == 'Pinhalzinho'){
+                        frete = 5;
+                    }
+                    else if(cidade != 'Pinhalzinho'){
+                        frete = 12;
+                    }
+                 }
+
                     if(produto == 'Cream Ale 600ml R$ 12,00'){
                         var total = quantidade * 12;
                         produto = 'Cream Ale 600ml';
@@ -176,29 +215,6 @@
                         var total = quantidade * 45;
                         produto = 'Hidromel 750ml';
                     }
-                 }
-                 else if(forma == 'Entrega') {
-                    if(produto == 'Cream Ale 600ml R$ 12,00'){
-                        var total = quantidade * 12;
-                        produto = 'Cream Ale 600ml';
-                    }
-                    else if(produto == 'Cream Ale 300ml R$ 7,00'){
-                        var total = quantidade * 7;
-                        produto = 'Cream Ale 300ml';
-                    }
-                    else if(produto == 'Dark Mild 600ml R$ 11,00'){
-                        var total = quantidade * 11;
-                        produto = 'Dark Mild 600ml';
-                    }
-                    else if(produto == 'Dark Mild 300ml R$ 6,00'){
-                        var total = quantidade * 6;
-                        produto = 'Dark Mild 300ml';
-                    }
-                    else if(produto == 'Hidromel 750ml R$ 45,00'){
-                        var total = quantidade * 45;
-                        produto = 'Hidromel 750ml';
-                    }
-                 }
                  
                 let url = "https://api.whatsapp.com/send?phone=5549991945261&text= Olá, gostaria de fazer o seguinte pedido! %0ANome: " + cliente + " " +
                 sobrenome + "%0AE-mail: "+ email +" %0ATelefone: "+ telefone + " %0ACidade: " + cidade + " %0AEndereco: " + endereco + " %0AProduto: " + produto + " %0ARetirada/Entrega: " + forma + " %0AQuantidade: " + quantidade + " UN" + " %0ATotal Pedido R$: " + total + ",00" + " %0AForma de Pagamento: " + pagamento + "%0AObrigado pela preferência!" + "%0AAguarde um momento que já lhe respondo!";
@@ -228,6 +244,7 @@
         
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Anderson Galiazzi 2022</div></footer>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
