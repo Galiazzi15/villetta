@@ -182,6 +182,7 @@
                  let endereco = document.querySelector('#endereco').value;
                  var total = 0;
                  var frete = 0;
+                 var totFinal = 0;
 
                  if(forma == 'Retirada'){
                     frete = 0;
@@ -215,9 +216,11 @@
                         var total = quantidade * 45;
                         produto = 'Hidromel 750ml';
                     }
+
+                    totFinal = total + frete;
                  
                 let url = "https://api.whatsapp.com/send?phone=5549991945261&text= Olá, gostaria de fazer o seguinte pedido! %0ANome: " + cliente + " " +
-                sobrenome + "%0AE-mail: "+ email +" %0ATelefone: "+ telefone + " %0ACidade: " + cidade + " %0AEndereco: " + endereco + " %0AProduto: " + produto + " %0ARetirada/Entrega: " + forma + " %0AQuantidade: " + quantidade + " UN" + " %0ATotal Pedido R$: " + total + ",00" + " %0AForma de Pagamento: " + pagamento + "%0AObrigado pela preferência!" + "%0AAguarde um momento que já lhe respondo!";
+                sobrenome + "%0AE-mail: "+ email +" %0ATelefone: "+ telefone + " %0ACidade: " + cidade + " %0AEndereco: " + endereco + " %0AProduto: " + produto + " %0ARetirada/Entrega: " + forma + " %0AQuantidade: " + quantidade + " UN" + " %0ATotal Pedido R$: " + total + ",00" + " %0AFrete R$: " + frete + ",00" + " %0AValor a Pagar R$: " + totFinal + ",00" + " %0AForma de Pagamento: " + pagamento + "%0AObrigado pela preferência!" + "%0AAguarde um momento que já lhe respondo!";
 
                 
                 alert('Villetta Cervejaria agradece pela preferência!');
